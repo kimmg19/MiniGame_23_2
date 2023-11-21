@@ -6,11 +6,7 @@ public class Bomb : MonoBehaviour
 {
 
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        print("Ãæµ¹");
-        gameObject.SetActive(false);
-        SceneManager.LoadScene(0);
-    }
+    
     void Start() {
         
     }

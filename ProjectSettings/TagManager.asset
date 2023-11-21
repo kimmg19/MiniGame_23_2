@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Disruptor
+  - Bomb
   layers:
   - Default
   - TransparentFX

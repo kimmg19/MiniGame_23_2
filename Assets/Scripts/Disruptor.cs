@@ -6,7 +6,6 @@ public class Disruptor : MonoBehaviour
 {
     public float patrolSpeed = 2f; // 방해꾼 이동 속도
     public float patrolTime = 1f; // 각 위치에서 머무는 시간
-
     private Vector2[] patrolPoints; // 랜덤으로 생성된 순회 지점
     private int currentPatrolIndex = 0; // 현재 순회 중인 지점의 인덱스
     private float patrolTimer = 0f; // 머무는 시간 측정용 타이머
@@ -67,4 +66,4 @@ public class Disruptor : MonoBehaviour
     }
     */
 }
-}
+
