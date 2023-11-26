@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Disruptor
   - Bomb
+  - Portal
   layers:
   - Default
   - TransparentFX

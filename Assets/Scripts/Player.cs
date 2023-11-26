@@ -1,9 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class Player : MonoBehaviour {
+    Portal portal;
+    void Start() {
+        portal=GetComponent<Portal>();
+    }
+
     void Update() {
         Mover();
     }
@@ -24,6 +31,7 @@ public class Player : MonoBehaviour {
         }
         transform.Translate(moveDirection);
     }
+
     private void OnTriggerEnter2D(Collider2D collision) {       //충돌 관리
         if (collision.gameObject.tag == "Bomb") {
             print("지뢰 밟음");
@@ -34,7 +42,8 @@ public class Player : MonoBehaviour {
             print("메뉴 호출");
             
         } else if (collision.gameObject.tag == "Portal") {
-            print("포탈 이동");
+            print(portal);
+
         } else if (collision.gameObject.tag == "Item") {
             print("아이템 사용");
 
