@@ -2,21 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Portal : MonoBehaviour
-{
+
+public class Portal : MonoBehaviour {
     [SerializeField]
-    GameObject[] pos;
-    Vector2 portal1;
-    Vector2 portal2;
-    void Start()
-    {
-        portal1 = pos[0].transform.position;
-        portal2 = pos[1].transform.position;
+    GameObject targetObj,toObj;
+    
 
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.CompareTag("Player")) {
+            targetObj = collision.gameObject;
+            targetObj.transform.position = toObj.transform.position;
+        }
     }
-
-    public void PortalMove() {
-        print("asd");
-
-    }
+    
 }
+

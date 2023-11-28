@@ -4,13 +4,11 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class Player : MonoBehaviour {
-    Portal portal;
-    void Start() {
-        portal=GetComponent<Portal>();
-    }
 
+    private void Start() {
+        transform.position = Vector3.zero;
+    }
     void Update() {
         Mover();
     }
@@ -19,36 +17,38 @@ public class Player : MonoBehaviour {
         Vector3 moveDirection = Vector3.zero;
         if (Input.GetKeyDown(KeyCode.A)) {
             moveDirection += Vector3.left;
+            transform.localEulerAngles = new Vector3(0, 0, 0);
         }
         if (Input.GetKeyDown(KeyCode.D)) {
             moveDirection += Vector3.right;
+            transform.localEulerAngles = new Vector3(0, 0, 180);
+
         }
         if (Input.GetKeyDown(KeyCode.S)) {
             moveDirection += Vector3.down;
+            transform.localEulerAngles = new Vector3(0, 0, 90);
+
         }
         if (Input.GetKeyDown(KeyCode.W)) {
             moveDirection += Vector3.up;
+            transform.localEulerAngles = new Vector3(0,0,-90);
+
         }
-        transform.Translate(moveDirection);
+        transform.position=transform.position + moveDirection;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {       //충돌 관리
-        if (collision.gameObject.tag == "Bomb") {
+        if (collision.CompareTag("Bomb")) {
             print("지뢰 밟음");
-            print("메뉴 호출");
+            print("Game Over");
             SceneManager.LoadScene(0);
-        } else if (collision.gameObject.tag == "Disruptor") {
+        } else if (collision.CompareTag("Disruptor")) {
             print("방해꾼");
-            print("메뉴 호출");
-            
-        } else if (collision.gameObject.tag == "Portal") {
-            print(portal);
+            print("Game Over");
+            SceneManager.LoadScene(0);
 
-        } else if (collision.gameObject.tag == "Item") {
+        } else if (collision.CompareTag("Item")) {
             print("아이템 사용");
-
         }
     }
-
-
 }
