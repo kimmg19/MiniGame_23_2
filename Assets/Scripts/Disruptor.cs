@@ -4,66 +4,56 @@ using UnityEngine;
 
 public class Disruptor : MonoBehaviour
 {
-    public float patrolSpeed = 2f; // 방해꾼 이동 속도
-    public float patrolTime = 1f; // 각 위치에서 머무는 시간
-    private Vector2[] patrolPoints; // 랜덤으로 생성된 순회 지점
-    private int currentPatrolIndex = 0; // 현재 순회 중인 지점의 인덱스
-    private float patrolTimer = 0f; // 머무는 시간 측정용 타이머
+    public float moveSpeed = 2f; // 이동 속도
+    private Vector2[] moveDirections = { Vector2.up, Vector2.down, Vector2.left, Vector2.right }; // 상하좌우 이동 방향
+    private int currentDirectionIndex = 0; // 현재 이동 방향의 인덱스
+    private Vector2 currentTarget; // 현재 목표 위치
 
     void Start()
     {
-        // 맵 내의 랜덤한 위치에 순회 지점 4개 생성
-        GeneratePatrolPoints();
-
         // 초기 위치 설정
-        transform.position = patrolPoints[0];
+        transform.position = new Vector2(0, 0);     // 우선 0,0으로 둠
+        SetNewTarget();
     }
 
     void Update()
     {
-        // 순회 중인 경우
-        if (patrolPoints.Length > 1)
+        // 목표 위치로 이동
+        transform.position = Vector2.MoveTowards(transform.position, currentTarget, moveSpeed * Time.deltaTime);
+
+        // 목표 위치에 도착했을 때 새로운 랜덤 방향과 목표 위치 설정
+        if ((Vector2)transform.position == currentTarget)
         {
-            // 현재 순회 지점으로 이동
-            transform.position = Vector2.MoveTowards(transform.position, patrolPoints[currentPatrolIndex], patrolSpeed * Time.deltaTime);
-
-            // 현재 순회 지점에 도착했을 때
-            if (Vector2.Distance(transform.position, patrolPoints[currentPatrolIndex]) < 0.1f)
-            {
-                // 머무는 시간 측정 시작
-                patrolTimer += Time.deltaTime;
-
-                // 머무는 시간이 지나면 다음 순회 지점으로 이동
-                if (patrolTimer >= patrolTime)
-                {
-                    patrolTimer = 0f;
-                    currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
-                }
-            }
+            SetRandomDirection();
+            SetNewTarget();
         }
     }
 
-    void GeneratePatrolPoints()
+    void SetRandomDirection()
     {
-        // 맵 내의 랜덤한 위치에 순회 지점 4개 생성
-        patrolPoints = new Vector2[4];
-        for (int i = 0; i < 4; i++)
-        {
-            float x = Random.Range(0f, 9f); // 맵의 가로 범위
-            float y = Random.Range(0f, 9f); // 맵의 세로 범위
-            patrolPoints[i] = new Vector2(x, y);
-        }
+        // 랜덤한 이동 방향 선택
+        currentDirectionIndex = Random.Range(0, moveDirections.Length);
+
+        // 현재 방향이 맵 가장자리로 이동하는지 체크
+        CheckEdge();
     }
 
-    /*
-     * void OnTriggerEnter2D(Collider2D other)
+    void SetNewTarget()
     {
-        // 팩맨과 충돌하면 게임 종료
-        if (other.CompareTag("Player"))
+        // 현재 위치에서 상하좌우 중 랜덤 방향으로 이동할 위치 설정
+        currentTarget = (Vector2)transform.position + moveDirections[currentDirectionIndex];
+
+        // 현재 방향이 맵 가장자리로 이동하는지 체크
+        CheckEdge();
+    }
+
+    void CheckEdge()
+    {
+        // 현재 위치가 맵 가장자리에 도달하면 방향을 반대로 설정
+        if (transform.position.x <= -8f || transform.position.x >= 8f || transform.position.y <= -4.5f || transform.position.y >= 4.5f)
         {
-            Debug.Log("Game Over");
+            // 현재 방향을 반대로 설정
+            currentDirectionIndex = (currentDirectionIndex + 2) % moveDirections.Length;
         }
     }
-    */
 }
-
