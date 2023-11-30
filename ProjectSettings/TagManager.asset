@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Disruptor
   - Bomb
-  - Portal
   - Item
   layers:
   - Default

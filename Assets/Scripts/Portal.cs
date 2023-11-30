@@ -6,14 +6,13 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour {
     [SerializeField]
-    GameObject targetObj, toObj;
+    GameObject toObj;   //순간이동할 위치
     
 
-    IEnumerator OnTriggerEnter2D(Collider2D collision) {
+    IEnumerator OnTriggerEnter2D(Collider2D collision) {        //순간이동
         yield return new WaitForSeconds(2f);
             if (collision.CompareTag("Player")) {
-                targetObj = collision.gameObject;
-                targetObj.transform.position = toObj.transform.position;
+                collision.transform.position = toObj.transform.position;
             
         }
     }
