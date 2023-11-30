@@ -12,7 +12,7 @@ public class Disruptor : MonoBehaviour
     void Start()
     {
         // 초기 위치 설정
-        transform.position = new Vector2(0, 0);     // 우선 0,0으로 둠
+        transform.position = new Vector2(10, 10);     // 우선 0,0으로 둠
         SetNewTarget();
     }
 
