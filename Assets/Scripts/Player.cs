@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
-
+    
     private void Start() {
         transform.position = Vector3.zero;
     }
@@ -46,6 +46,7 @@ public class Player : MonoBehaviour {
             print("방해꾼");
             print("Game Over");
             SceneManager.LoadScene(0);
+
 
         } else if (collision.CompareTag("Item")) {
             print("아이템 사용");
