@@ -6,9 +6,9 @@ using UnityEngine;
 //한번 순간 이동 후 second 만큼 기다려야 다시 작동
 public class Portal : MonoBehaviour {
     [SerializeField]
-    GameObject[] toObj;   //순간이동할 위치
-    float second = 3f;
-   
+    GameObject[] toObj;     //순간이동할 위치
+    float second = 3f;      //포탈 콜라이더 
+    
 
     private void OnTriggerEnter2D(Collider2D collision) {        //순간이동
         if (collision.CompareTag("Player")) {
@@ -28,7 +28,6 @@ public class Portal : MonoBehaviour {
         //콜라이더 활성화
         toObj[0].GetComponent<Collider2D>().enabled = true;
         toObj[1].GetComponent<Collider2D>().enabled = true;
-
     }
 
 }

@@ -16,13 +16,12 @@ public class Player : MonoBehaviour {
     private void Mover() {              //플레이어 움직임
         Vector3 moveDirection = Vector3.zero;
         if (Input.GetKeyDown(KeyCode.A)) {
-            moveDirection += Vector3.left;
+            moveDirection += (Vector3.left / UnityEditor.EditorSnapSettings.move.x);
             transform.localEulerAngles = new Vector3(0, 0, 0);
         }
         if (Input.GetKeyDown(KeyCode.D)) {
             moveDirection += Vector3.right;
             transform.localEulerAngles = new Vector3(0, 0, 180);
-
         }
         if (Input.GetKeyDown(KeyCode.S)) {
             moveDirection += Vector3.down;
