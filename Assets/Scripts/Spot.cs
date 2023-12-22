@@ -1,14 +1,11 @@
 using UnityEngine;
 
-public class Spot : MonoBehaviour
-{
+public class Spot : MonoBehaviour{
 
-
-    
+       
     void Start() {
         
-    }
-     
+    }     
     
     private void OnMouseDown() {
         Renderer obj = gameObject.GetComponent<Renderer>();
@@ -18,6 +15,4 @@ public class Spot : MonoBehaviour
             obj.material.color = Color.white;
         }
     }
-
-
 }
