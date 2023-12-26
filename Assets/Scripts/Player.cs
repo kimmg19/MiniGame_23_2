@@ -56,6 +56,12 @@ public class Player : MonoBehaviour {
             SceneManager.LoadScene(0);
         } else if (collision.CompareTag("Item")) {
             print("아이템 사용");
+        } else if (collision.CompareTag("Obstacle"))
+        {
+            print("장애물과 충돌");
+            print("Game Over");
+            SceneManager.LoadScene(0);
         }
+
     }
 }
