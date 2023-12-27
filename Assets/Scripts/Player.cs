@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 
-    private bool hasRedDot = false;
 
     float gridValue;    //플레이어 이동 수치 값.
     [SerializeField]
@@ -24,11 +23,7 @@ public class Player : MonoBehaviour {
     }
 
     void Mover() {     
-        //플레이어 움직임
-
-        //빨간점충돌시 멈춤
-        /*if (hasRedDot)
-            return;*/
+        //플레이어 움직임       
 
         Vector3 moveDirection = Vector3.zero;
         if (Input.GetKeyDown(KeyCode.A)) {
@@ -65,11 +60,7 @@ public class Player : MonoBehaviour {
             SceneManager.LoadScene(0);
         } else if (collision.CompareTag("Item")) {
             print("아이템 사용");
-        } /*else if (collision.CompareTag("RedDot"))
-        {
-            print("빨간 점에 충돌함");
-            hasRedDot = true;
-        }*/
+        }
 
     }
 }

@@ -3,15 +3,16 @@ using UnityEngine;
 public class Bomb3 : MonoBehaviour
 {
     public GameObject tileObj;
-
-
-    private void OnTriggerEnter2D(Collider2D collision) {
+    public float radius_Dot;       //탐지할 점의 범위
+    public LayerMask mask;
+    void OnTriggerEnter2D(Collider2D collision) {
         tileObj.SetActive(true);
-        gameObject.SetActive(false);
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        ShowDots();
+
     }
-
-
-
-
-
+    //주변 점 지뢰 0개면 없애기.
+    void ShowDots() {
+        Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, radius_Dot, mask);
+    }
 }

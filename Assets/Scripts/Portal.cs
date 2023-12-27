@@ -7,7 +7,7 @@ using UnityEngine;
 public class Portal : MonoBehaviour {
     [SerializeField]
     GameObject[] toObj;     //순간이동할 위치
-    float second = 3f;      //포탈 콜라이더 
+    float seconds = 3f;      //포탈 콜라이더 
     
 
     private void OnTriggerEnter2D(Collider2D collision) {        //순간이동
@@ -21,7 +21,7 @@ public class Portal : MonoBehaviour {
             //콜라이더 비활성화
             toObj[0].GetComponent<Collider2D>().enabled = false;
             toObj[1].GetComponent<Collider2D>().enabled = false;
-            Invoke("Enabled", second);
+            Invoke("Enabled", seconds);
         }
     }
     private void Enabled() {
