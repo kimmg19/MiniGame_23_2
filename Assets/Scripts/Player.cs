@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
+
+    private bool hasRedDot = false;
+
     float gridValue;    //플레이어 이동 수치 값.
     [SerializeField]
     float maxPos=3.6f;       //플레이어 이동 제한 변수.
@@ -20,7 +23,13 @@ public class Player : MonoBehaviour {
         Mover();
     }
 
-    void Mover() {              //플레이어 움직임
+    void Mover() {     
+        //플레이어 움직임
+
+        //빨간점충돌시 멈춤
+        if (hasRedDot)
+            return;
+
         Vector3 moveDirection = Vector3.zero;
         if (Input.GetKeyDown(KeyCode.A)) {
             moveDirection += Vector3.left * gridValue;
@@ -56,6 +65,10 @@ public class Player : MonoBehaviour {
             SceneManager.LoadScene(0);
         } else if (collision.CompareTag("Item")) {
             print("아이템 사용");
+        } else if (collision.CompareTag("RedDot"))
+        {
+            print("빨간 점에 충돌함");
+            hasRedDot = true;
         }
 
     }
