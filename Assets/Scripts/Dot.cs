@@ -1,36 +1,20 @@
-using System;
 using UnityEngine;
 
-public class Dot : MonoBehaviour {
+//점 충돌 관리
+public class Dot : MonoBehaviour
+{
+    
+    public GameObject tileObj;
+    public float radius_Dot;       //탐지할 점의 범위
+    public LayerMask mask;
+    void OnTriggerEnter2D(Collider2D collision) {
+        tileObj.SetActive(true);
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        ShowDots();
 
-    void Update() {
-        // 마우스 우클릭 감지
-        if (Input.GetMouseButtonDown(1)) {
-
-            ToggleRedDot(); // 우클릭 시 빨간 점 토글
-        }
     }
-
-    void ToggleRedDot() {
-
-        //마우스 클릭한 좌표값 가져오기
-        Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //해당 좌표에 있는 오브젝트 찾기
-        RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero, 0f);
-        if (hit.collider != null) {
-            GameObject click_obj = hit.transform.gameObject;
-            SpriteRenderer spriteRenderer = click_obj.GetComponent<SpriteRenderer>();
-
-            print(click_obj.name);
-            if (click_obj.tag == "Dot") {
-                if (spriteRenderer.color == Color.white) {
-                    spriteRenderer.color = Color.red;
-                }else
-                    spriteRenderer.color = Color.white;
-            }
-
-        }
-
-
-    }    
+    //주변 점 지뢰 0개면 없애기.
+    void ShowDots() {
+        Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, radius_Dot, mask);
+    }
 }

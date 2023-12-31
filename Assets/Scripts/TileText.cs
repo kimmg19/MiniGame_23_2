@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+//숫자타일 표현
 public class TileText : MonoBehaviour {
     public LayerMask objectLayer;
     TextMeshPro text;

@@ -336,6 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c9634d76941a64088418137388a587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  redDot: {fileID: 0}
   tileObj: {fileID: 7861858389818615602}
   radius_Dot: 1.5
   mask:

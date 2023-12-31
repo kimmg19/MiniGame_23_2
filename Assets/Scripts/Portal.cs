@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.UIElements;
 using UnityEngine;
 
-//한번 순간 이동 후 second 만큼 기다려야 다시 작동
+//한번 순간 이동 후 seconds 만큼 기다려야 다시 작동
 public class Portal : MonoBehaviour {
     [SerializeField]
     GameObject[] toObj;     //순간이동할 위치
