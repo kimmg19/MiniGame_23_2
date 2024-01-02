@@ -7,7 +7,6 @@ public class DotController : MonoBehaviour {
     void Update() {
         // 마우스 우클릭 감지
         if (Input.GetMouseButtonDown(1)) {
-
             ToggleRedDot(); // 우클릭 시 빨간 점 토글
         }
     }

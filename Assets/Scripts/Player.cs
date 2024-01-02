@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 
-
+    
     float gridValue;    //플레이어 이동 수치 값.
     [SerializeField]
     float maxPos=3.6f;       //플레이어 이동 제한 변수.
