@@ -159,3 +159,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPos: 3.6
+  playerPos: {x: -3.6, y: 3.6}

@@ -1,28 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 
-    
     float gridValue;    //플레이어 이동 수치 값.
     [SerializeField]
-    float maxPos=3.6f;       //플레이어 이동 제한 변수.
+    float maxPos = 3.6f;       //플레이어 이동 제한 변수.
+    [SerializeField]
+    Vector2 playerPos;
+    
 
     void Start() {
-        transform.position = Vector3.zero;                        //플레이어 초기 위치 설정        
 #if UNITY_EDITOR
         gridValue = UnityEditor.EditorSnapSettings.move.x;        //플레이어 그리드 수치만큼 이동.
 #endif
     }
 
     void Update() {
+        
         Mover();
     }
 
-    void Mover() {     
+    void Mover() {
         //플레이어 움직임       
 
         Vector3 moveDirection = Vector3.zero;
