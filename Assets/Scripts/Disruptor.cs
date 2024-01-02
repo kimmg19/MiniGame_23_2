@@ -8,13 +8,11 @@ public class Disruptor : MonoBehaviour
     private Vector2[] moveDirections = { Vector2.up, Vector2.down }; // 상하 이동 방향
     private Vector2 currentTarget; // 현재 목표 위치
     [SerializeField]
-    Vector2 startPos; // 시작 위치
     private bool moveUp = true; // 현재는 위로 이동 중인지 여부
 
     void Start()
     {
         // 초기 위치 설정
-        transform.position = startPos;
         SetNewTarget();
     }
 
@@ -35,13 +33,13 @@ public class Disruptor : MonoBehaviour
 
     void SetNewTargetUp()
     {
-        currentTarget = (Vector2)transform.position + Vector2.up;
+        currentTarget = (Vector2)transform.position + Vector2.up*2;
         moveUp = false;
     }
 
     void SetNewTargetDown()
     {
-        currentTarget = (Vector2)transform.position + Vector2.down;
+        currentTarget = (Vector2)transform.position + Vector2.down*2;
         moveUp = true;
     }
 

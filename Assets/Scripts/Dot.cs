@@ -20,7 +20,7 @@ public class Dot : MonoBehaviour
     }
 
     void ShowBombs() {
-        Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, radius, mask_Bomb);       //레이어를 통해 주변 지뢰 탐지.
+        Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, radius, mask_Bomb);   //레이어를 통해 주변 지뢰 파악
         if (colls.Length == 0) {
             text.text = string.Empty;
         } else {
@@ -36,11 +36,11 @@ public class Dot : MonoBehaviour
 
     //주변 점 지뢰 0개면 없애기.
     void ShowDots() {
-        Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, radius, mask_Dot);
-        foreach (Collider2D coll in colls) {
-            if (coll.transform.GetChild(0).GetComponent<TextMeshPro>().text == string.Empty) {
-                coll.GetComponent<Dot>().ShowTile();
-                coll.GetComponent<Dot>().ShowDots();
+        Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, radius, mask_Dot);  //레이러를 통해 주변 Dot 파악
+        for (int i=0;i<colls.Length;i++) {
+            if (colls[i].transform.GetChild(0).GetComponent<TextMeshPro>().text == string.Empty) {
+                colls[i].GetComponent<Dot>().ShowTile();
+                colls[i].GetComponent<Dot>().ShowDots();                
             }
         }
     }
