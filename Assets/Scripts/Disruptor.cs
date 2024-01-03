@@ -1,46 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Disruptor : MonoBehaviour
 {
-    public float moveSpeed = 2f; // 이동 속도
-    private Vector2[] moveDirections = { Vector2.up, Vector2.down }; // 상하 이동 방향
-    private Vector2 currentTarget; // 현재 목표 위치
+    public float moveSpeed = 2f;
+    private Vector2[] moveDirections = { Vector2.up, Vector2.down };
+    private Vector2 currentTarget;
     [SerializeField]
-    private bool moveUp = true; // 현재는 위로 이동 중인지 여부
+    private bool moveUp = true;
 
     void Start()
     {
-        // 초기 위치 설정
         SetNewTarget();
     }
 
     void Update()
     {
-        // 목표 위치로 이동
         transform.position = Vector2.MoveTowards(transform.position, currentTarget, moveSpeed * Time.deltaTime);
 
-        // 목표 위치에 도착했을 때 새로운 목표 위치 설정
         if ((Vector2)transform.position == currentTarget)
         {
-            if (moveUp)
-                SetNewTargetUp();
-            else
-                SetNewTargetDown();
+            SetNewTarget();
         }
-    }
-
-    void SetNewTargetUp()
-    {
-        currentTarget = (Vector2)transform.position + Vector2.up*2;
-        moveUp = false;
-    }
-
-    void SetNewTargetDown()
-    {
-        currentTarget = (Vector2)transform.position + Vector2.down*2;
-        moveUp = true;
     }
 
     void SetNewTarget()
@@ -49,5 +29,27 @@ public class Disruptor : MonoBehaviour
             SetNewTargetUp();
         else
             SetNewTargetDown();
+    }
+
+    void SetNewTargetUp()
+    {
+        currentTarget = (Vector2)transform.position + Vector2.up * 2;
+        moveUp = false;
+    }
+
+    void SetNewTargetDown()
+    {
+        currentTarget = (Vector2)transform.position + Vector2.down * 2;
+        moveUp = true;
+    }
+
+    // 플레이어와 부딪쳤을 때 호출되는 메서드
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // 부딪힌 경우에는 플레이어 스크립트에서 정의한 OnPlayerCollision 메서드를 호출
+            collision.gameObject.GetComponent<Player>().OnPlayerCollision(GetComponent<Collider2D>());
+        }
     }
 }

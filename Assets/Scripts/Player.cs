@@ -1,69 +1,110 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
+    float gridValue;
+    [SerializeField] float maxPos = 3.6f;
+    [SerializeField] Vector2 playerPos;
 
-    float gridValue;    //플레이어 이동 수치 값.
-    [SerializeField]
-    float maxPos = 3.6f;       //플레이어 이동 제한 변수.
-    [SerializeField]
-    Vector2 playerPos;
-    
+    private bool isInvincible = false;
+    public float invincibilityDuration = 3f;
 
-    void Start() {
+    void Start()
+    {
 #if UNITY_EDITOR
-        gridValue = UnityEditor.EditorSnapSettings.move.x;        //플레이어 그리드 수치만큼 이동.
+        gridValue = UnityEditor.EditorSnapSettings.move.x;
 #endif
     }
 
-    void Update() {
-        
+    void Update()
+    {
         Mover();
     }
 
-    void Mover() {
-        //플레이어 움직임       
-
+    void Mover()
+    {
         Vector3 moveDirection = Vector3.zero;
-        if (Input.GetKeyDown(KeyCode.A)) {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
             moveDirection += Vector3.left * gridValue;
             transform.localEulerAngles = new Vector3(0, 0, 0);
         }
-        if (Input.GetKeyDown(KeyCode.D)) {
+        if (Input.GetKeyDown(KeyCode.D))
+        {
             moveDirection += Vector3.right * gridValue;
             transform.localEulerAngles = new Vector3(0, 0, 180);
         }
-        if (Input.GetKeyDown(KeyCode.S)) {
+        if (Input.GetKeyDown(KeyCode.S))
+        {
             moveDirection += Vector3.down * gridValue;
             transform.localEulerAngles = new Vector3(0, 0, 90);
         }
-        if (Input.GetKeyDown(KeyCode.W)) {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
             moveDirection += Vector3.up * gridValue;
             transform.localEulerAngles = new Vector3(0, 0, -90);
         }
-        //플레이어 이동 제한-그리드 수치만큼, 현재 9*9에서만
+
         Vector3 newPosition = transform.position + moveDirection;
         newPosition.x = Mathf.Clamp(newPosition.x, -maxPos, maxPos);
         newPosition.y = Mathf.Clamp(newPosition.y, -maxPos, maxPos);
         transform.position = newPosition;
     }
 
-    void OnTriggerEnter2D(Collider2D collision) {       //충돌 관리
-        if (collision.CompareTag("Bomb")) {
-            print("지뢰 밟음");
-            print("Game Over");
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Bomb"))
+        {
+            Debug.Log("지뢰 밟음");
+            Debug.Log("Game Over");
             SceneManager.LoadScene(0);
-        } else if (collision.CompareTag("Disruptor")) {
-            print("방해꾼");
-            print("Game Over");
-            SceneManager.LoadScene(0);
-        } else if (collision.CompareTag("Item")) {
-            print("아이템 사용");
         }
+        else if (collision.CompareTag("Disruptor"))
+        {
+            Debug.Log("방해꾼");
+            Debug.Log("Game Over");
+            SceneManager.LoadScene(0);
+        }
+        else if (collision.CompareTag("InvincibilityItem"))
+        {
+            Debug.Log("아이템 사용");
+            if (isInvincible)
+            {
+                Debug.Log("이미 무적 상태입니다.");
+            }
+            else
+            {
+                StartCoroutine(ActivateInvincibility());
+            }
+        }
+    }
 
+    private IEnumerator ActivateInvincibility()
+    {
+        isInvincible = true;
+        Debug.Log("무적 상태로 전환");
+
+        // 무적상태일때 처리코드
+
+        yield return new WaitForSeconds(invincibilityDuration);
+
+        isInvincible = false;
+        Debug.Log("무적 상태 해제");
+    }
+
+    public void OnPlayerCollision(Collider2D disruptorCollider)
+    {
+        if (isInvincible)
+        {
+            Debug.Log("무적 상태로 부딪히지 않음");
+        }
+        else
+        {
+            Debug.Log("부딪혔음");
+
+            // 부딪쳤을때 처리코드
+        }
     }
 }
