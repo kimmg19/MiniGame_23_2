@@ -6,8 +6,8 @@ TagManager:
   tags:
   - Disruptor
   - Bomb
-  - Item
   - Dot
+  - InvincibilityItem
   layers:
   - Default
   - TransparentFX

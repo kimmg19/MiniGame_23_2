@@ -42,14 +42,12 @@ public class Disruptor : MonoBehaviour
         currentTarget = (Vector2)transform.position + Vector2.down * 2;
         moveUp = true;
     }
-
+    
     // 플레이어와 부딪쳤을 때 호출되는 메서드
-    public void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
+    void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.gameObject.CompareTag("Player")) {
             // 부딪힌 경우에는 플레이어 스크립트에서 정의한 OnPlayerCollision 메서드를 호출
             collision.gameObject.GetComponent<Player>().OnPlayerCollision(GetComponent<Collider2D>());
         }
-    }
+    }   
 }
