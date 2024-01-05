@@ -7,8 +7,8 @@ using UnityEngine;
 public class Portal : MonoBehaviour {
     [SerializeField]
     GameObject[] toObj;     //순간이동할 위치
-    float seconds = 3f;      //포탈 콜라이더 
-    
+    float seconds = 3f;
+
 
     private void OnTriggerEnter2D(Collider2D collision) {        //순간이동
         if (collision.CompareTag("Player")) {
@@ -21,6 +21,10 @@ public class Portal : MonoBehaviour {
             //콜라이더 비활성화
             toObj[0].GetComponent<Collider2D>().enabled = false;
             toObj[1].GetComponent<Collider2D>().enabled = false;
+            toObj[0].GetComponent<SpriteRenderer>().color = Color.yellow;
+            toObj[1].GetComponent<SpriteRenderer>().color = Color.yellow;
+
+            print("쿨타임");
             Invoke("Enabled", seconds);
         }
     }
@@ -28,6 +32,10 @@ public class Portal : MonoBehaviour {
         //콜라이더 활성화
         toObj[0].GetComponent<Collider2D>().enabled = true;
         toObj[1].GetComponent<Collider2D>().enabled = true;
+        toObj[0].GetComponent<SpriteRenderer>().color = Color.white;
+        toObj[1].GetComponent<SpriteRenderer>().color = Color.white;
+        print("쿨타임 종료");
+
     }
 
 }

@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSpawner : MonoBehaviour
-{
+public class PlayerSpawner : MonoBehaviour {
     public GameObject playerPrefab;
     float gridSize = 0.9f;
     private bool playerSpawned = false; // 플레이어가 생성되었는지 나타내는 변수
-    
 
-    void Update()
-    {
+
+    void Update() {
         if (!playerSpawned && Input.GetMouseButtonDown(0)) {
             // 마우스 클릭 위치를 가져옴
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);

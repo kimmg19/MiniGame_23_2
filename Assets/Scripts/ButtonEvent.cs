@@ -15,7 +15,7 @@ public class ButtonEvent : MonoBehaviour {
     void Update() {
         if (EventSystem.current.IsPointerOverGameObject()) {
             textColor.color = Color.yellow;
-        }else
+        } else
             textColor.color = Color.white;
     }
 }

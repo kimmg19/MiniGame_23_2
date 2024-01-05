@@ -3,12 +3,11 @@ using UnityEngine;
 
 //점 클릭 이벤트 관리
 public class DotController : MonoBehaviour {
+    float dotCount = 0f;
 
-    [SerializeField]
-    SpriteRenderer playerSprite;
     void Update() {
         // 마우스 우클릭 감지
-        if (Input.GetMouseButtonDown(1)){
+        if (Input.GetMouseButtonDown(1)) {
             ToggleRedDot(); // 우클릭 시 빨간 점 토글
         }
     }
@@ -27,9 +26,10 @@ public class DotController : MonoBehaviour {
             if (click_obj.tag == "Dot") {
                 if (spriteRenderer.color == Color.white) {
                     spriteRenderer.color = Color.red;
-                    
+                    dotCount++;
                 } else
                     spriteRenderer.color = Color.white;
+                dotCount--;
             }
         }
     }
