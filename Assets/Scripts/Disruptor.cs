@@ -1,45 +1,61 @@
 using UnityEngine;
 
-public class Disruptor : MonoBehaviour {
+public class Disruptor : MonoBehaviour
+{
     public float moveSpeed = 2f;
+    public float moveRange = 2f;
     private Vector2[] moveDirections = { Vector2.up, Vector2.down };
     private Vector2 currentTarget;
     [SerializeField]
     private bool moveUp = true;
 
-    void Start() {
+    // í”„ë¦¬íŒ¹ ë°°ì—´ ì„ ì–¸
+    public GameObject[] disruptorPrefabs;
+
+    void Start()
+    {
         SetNewTarget();
     }
 
-    void Update() {
+    void Update()
+    {
         transform.position = Vector2.MoveTowards(transform.position, currentTarget, moveSpeed * Time.deltaTime);
 
-        if ((Vector2)transform.position == currentTarget) {
+        if ((Vector2)transform.position == currentTarget)
+        {
             SetNewTarget();
         }
     }
 
-    void SetNewTarget() {
+    void SetNewTarget()
+    {
         if (moveUp)
             SetNewTargetUp();
         else
             SetNewTargetDown();
     }
 
-    void SetNewTargetUp() {
-        currentTarget = (Vector2)transform.position + Vector2.up * 2;
+    void SetNewTargetUp()
+    {
+        // í”„ë¦¬íŒ¹ì„ ì„ íƒí•˜ì—¬ ì¸ìŠ¤í„´ìŠ¤í™”
+        GameObject prefabInstance = Instantiate(disruptorPrefabs[0], transform.position, Quaternion.identity);
+        currentTarget = (Vector2)transform.position + Vector2.up * moveRange;
         moveUp = false;
     }
 
-    void SetNewTargetDown() {
-        currentTarget = (Vector2)transform.position + Vector2.down * 2;
+    void SetNewTargetDown()
+    {
+        // í”„ë¦¬íŒ¹ì„ ì„ íƒí•˜ì—¬ ì¸ìŠ¤í„´ìŠ¤í™”
+        GameObject prefabInstance = Instantiate(disruptorPrefabs[1], transform.position, Quaternion.identity);
+        currentTarget = (Vector2)transform.position + Vector2.down * moveRange;
         moveUp = true;
     }
 
-    // ÇÃ·¹ÀÌ¾î¿Í ºÎµúÃÆÀ» ¶§ È£ÃâµÇ´Â ¸Ş¼­µå
-    void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.CompareTag("Player")) {
-            // ºÎµúÈù °æ¿ì¿¡´Â ÇÃ·¹ÀÌ¾î ½ºÅ©¸³Æ®¿¡¼­ Á¤ÀÇÇÑ OnPlayerCollision ¸Ş¼­µå¸¦ È£Ãâ
+    // í”Œë ˆì´ì–´ì™€ ë¶€ë”ªì³¤ì„ ë•Œ í˜¸ì¶œë˜ëŠ” ë©”ì„œë“œ
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
             collision.gameObject.GetComponent<Player>().OnPlayerCollision(GetComponent<Collider2D>());
         }
     }
