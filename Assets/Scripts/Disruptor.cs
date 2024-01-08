@@ -9,11 +9,13 @@ public class Disruptor : MonoBehaviour
     [SerializeField]
     private bool moveUp = true;
 
-    // 프리팹 배열 선언
-    public GameObject[] disruptorPrefabs;
+    // 프리팹 배열 선언 (이미지만 포함하도록 수정)
+    public Sprite[] disruptorSprites;
+    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         SetNewTarget();
     }
 
@@ -37,16 +39,16 @@ public class Disruptor : MonoBehaviour
 
     void SetNewTargetUp()
     {
-        // 프리팹을 선택하여 인스턴스화
-        GameObject prefabInstance = Instantiate(disruptorPrefabs[0], transform.position, Quaternion.identity);
+        // 위쪽 방향 이미지 설정
+        spriteRenderer.sprite = disruptorSprites[0];
         currentTarget = (Vector2)transform.position + Vector2.up * moveRange;
         moveUp = false;
     }
 
     void SetNewTargetDown()
     {
-        // 프리팹을 선택하여 인스턴스화
-        GameObject prefabInstance = Instantiate(disruptorPrefabs[1], transform.position, Quaternion.identity);
+        // 아래쪽 방향 이미지 설정
+        spriteRenderer.sprite = disruptorSprites[1];
         currentTarget = (Vector2)transform.position + Vector2.down * moveRange;
         moveUp = true;
     }
