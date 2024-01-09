@@ -54,26 +54,34 @@ public class Player : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collision)
+{
+    if (collision.CompareTag("Mine"))
     {
-        if (collision.CompareTag("Mine"))
+        if (isInvincible)
         {
-            Debug.Log("지뢰 밟음");
+            Debug.Log("무적 상태로 지뢰에 부딪히지 않음");
+        }
+        else
+        {
+            Debug.Log("지뢰에 부딪혔음");
             Debug.Log("Game Over");
             SceneManager.LoadScene(0);
         }
-        else if (collision.CompareTag("InvincibilityItem"))
+    }
+    else if (collision.CompareTag("InvincibilityItem"))
+    {
+        Debug.Log("아이템 사용");
+        if (isInvincible)
         {
-            Debug.Log("아이템 사용");
-            if (isInvincible)
-            {
-                Debug.Log("이미 무적 상태입니다.");
-            }
-            else
-            {
-                StartCoroutine(ActivateInvincibility());
-            }
+            Debug.Log("이미 무적 상태입니다.");
+        }
+        else
+        {
+            StartCoroutine(ActivateInvincibility());
         }
     }
+}
+
 
     private IEnumerator ActivateInvincibility()
     {
