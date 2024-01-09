@@ -5,9 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Disruptor
-  - Bomb
   - Dot
   - InvincibilityItem
+  - Mine
   layers:
   - Default
   - TransparentFX
@@ -17,7 +17,7 @@ TagManager:
   - UI
   - Player
   - Portal
-  - Bomb
+  - Mine
   - Dot
   - 
   - 

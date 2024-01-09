@@ -4,13 +4,11 @@ using System.Collections;
 public class HintItem : MonoBehaviour {
     public float itemDuration = 0.25f;
     public LayerMask mineLayer; // 지뢰 레이어
-    [SerializeField]
-    float radius;
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player")) {
             UseItem();
-            //Destroy(gameObject);
+            
         }
     }
 
@@ -23,14 +21,15 @@ public class HintItem : MonoBehaviour {
         Collider2D[] hitColliders = Physics2D.OverlapBoxAll(position, new Vector2(5, 5) * 0.9f, 0);
 
         foreach (Collider2D collider in hitColliders) {
-            if (collider.CompareTag("Bomb")) {
+            if (collider.CompareTag("Mine")) {
                 collider.GetComponent<SpriteRenderer>().sortingOrder = 2;
             }
         }
         yield return new WaitForSeconds(itemDuration); // 0.25초 대기
         foreach (Collider2D collider in hitColliders) {
-            if (collider.CompareTag("Bomb")) {
+            if (collider.CompareTag("Mine")) {
                 collider.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                Destroy(gameObject);
             }
         }
     }

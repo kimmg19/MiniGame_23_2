@@ -20,7 +20,11 @@ public class InvincibilityItem : MonoBehaviour {
     }
 
     private IEnumerator DisableInvincibilityAfterDelay(GameObject player) {
+        
+
         yield return new WaitForSeconds(invincibilityDuration);
+        
+
         isInvincible = false;
 
         Debug.Log("무적 효과 종료");

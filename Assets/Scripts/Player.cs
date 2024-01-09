@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Bomb"))
+        if (collision.CompareTag("Mine"))
         {
             Debug.Log("Áö·Ú ¹âÀ½");
             Debug.Log("Game Over");

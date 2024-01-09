@@ -287,7 +287,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c9634d76941a64088418137388a587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1.5
+  radius_Bomb: 0.15
+  radius_Dot: 0.09
   mask_Bomb:
     serializedVersion: 2
     m_Bits: 256
