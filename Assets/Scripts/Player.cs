@@ -5,8 +5,7 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     float gridValue;
-    [SerializeField] float maxPos = 3.6f;
-    [SerializeField] Vector2 playerPos;
+    float maxPos;
 
     private bool isInvincible = false;
     public float invincibilityDuration = 3f;
@@ -16,6 +15,7 @@ public class Player : MonoBehaviour
 #if UNITY_EDITOR
         gridValue = UnityEditor.EditorSnapSettings.move.x;
 #endif
+        maxPos = gridValue * 4f;
     }
 
     void Update()

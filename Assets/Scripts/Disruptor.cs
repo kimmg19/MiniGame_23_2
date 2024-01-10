@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Disruptor : MonoBehaviour
 {
+    float gridValue;
     public float moveSpeed = 2f;
     public float moveRange = 2f;
     private Vector2[] moveDirections = { Vector2.up, Vector2.down };
@@ -15,8 +16,13 @@ public class Disruptor : MonoBehaviour
 
     void Start()
     {
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         SetNewTarget();
+#if UNITY_EDITOR
+        gridValue = UnityEditor.EditorSnapSettings.move.x;
+        print(gridValue);
+#endif
     }
 
     void Update()
@@ -41,7 +47,7 @@ public class Disruptor : MonoBehaviour
     {
         // 위쪽 방향 이미지 설정
         spriteRenderer.sprite = disruptorSprites[0];
-        currentTarget = (Vector2)transform.position + Vector2.up * moveRange;
+        currentTarget = (Vector2)transform.position + Vector2.up * moveRange* gridValue;
         moveUp = false;
     }
 
@@ -49,7 +55,7 @@ public class Disruptor : MonoBehaviour
     {
         // 아래쪽 방향 이미지 설정
         spriteRenderer.sprite = disruptorSprites[1];
-        currentTarget = (Vector2)transform.position + Vector2.down * moveRange;
+        currentTarget = (Vector2)transform.position + Vector2.down * moveRange* gridValue;
         moveUp = true;
     }
 

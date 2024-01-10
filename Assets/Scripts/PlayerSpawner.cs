@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class PlayerSpawner : MonoBehaviour {
     public GameObject playerPrefab;
-    float gridSize = 0.9f;
+    float gridValue;
+    void Start() {
+#if UNITY_EDITOR
+        gridValue = UnityEditor.EditorSnapSettings.move.x;
+        print(gridValue);
+#endif
+    }
+
     private bool playerSpawned = false; // 플레이어가 생성되었는지 나타내는 변수
 
 
@@ -13,8 +20,8 @@ public class PlayerSpawner : MonoBehaviour {
             // 마우스 클릭 위치를 가져옴
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             // 그리드에 딱 맞게 위치 조정
-            float newX = Mathf.Round(mousePosition.x / gridSize) * gridSize;
-            float newY = Mathf.Round(mousePosition.y / gridSize) * gridSize;
+            float newX = Mathf.Round(mousePosition.x / gridValue) * gridValue;
+            float newY = Mathf.Round(mousePosition.y / gridValue) * gridValue;
             Vector3 roundedPosition = new Vector3(newX, newY, 0f);
 
             // 플레이어를 마우스 클릭 위치에 생성
