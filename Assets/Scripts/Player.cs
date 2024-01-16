@@ -65,7 +65,9 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Áö·Ú¿¡ ºÎµúÇûÀ½");
             Debug.Log("Game Over");
-            SceneManager.LoadScene(0);
+            GameObject losePannel = GameObject.Find("Canvas");
+            losePannel = losePannel.transform.Find("LoseResultPannel").gameObject;
+            losePannel.SetActive(true);
         }
     }
     else if (collision.CompareTag("InvincibilityItem"))
@@ -113,6 +115,9 @@ public class Player : MonoBehaviour
             Debug.Log("¹æÇØ²Û ºÎµúÇûÀ½");
             SceneManager.LoadScene(0);
             // ºÎµúÃÆÀ»¶§ Ã³¸®ÄÚµå
+            GameObject losePannel = GameObject.Find("Canvas");
+            losePannel = losePannel.transform.Find("LoseResultPannel").gameObject;
+            losePannel.SetActive(true);
         }
     }
 }
