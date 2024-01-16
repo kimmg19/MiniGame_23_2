@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 //점 클릭 이벤트 관리
-public class DotController : MonoBehaviour {
+public class DotController :MonoBehaviour {
     public LayerMask layerMask; //우클릭시 선택되는 layer 선택
     void Update() {
         // 마우스 우클릭 감지
@@ -20,12 +20,19 @@ public class DotController : MonoBehaviour {
         if (hit.collider != null) {
             GameObject click_obj = hit.transform.gameObject;
             SpriteRenderer spriteRenderer = click_obj.GetComponent<SpriteRenderer>();
+            GameObject mineCount = GameObject.Find("MineCount");
             //점 클릭 시 색 변경
             if (click_obj.CompareTag("Dot")) {
-                if (spriteRenderer.color == Color.white) {
+                if (spriteRenderer.color == Color.white)
+                {
                     spriteRenderer.color = Color.red;
-                } else
+                    mineCount.GetComponent<MineCount>().mineCount--;
+                }
+                else
+                {
                     spriteRenderer.color = Color.white;
+                    mineCount.GetComponent<MineCount>().mineCount++;
+                }
             }
         }
     }
