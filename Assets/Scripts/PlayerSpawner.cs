@@ -8,7 +8,6 @@ public class PlayerSpawner : MonoBehaviour {
     void Start() {
 #if UNITY_EDITOR
         gridValue = UnityEditor.EditorSnapSettings.move.x;
-        print(gridValue);
 #endif
     }
 

@@ -20,7 +20,7 @@ public class DotController :MonoBehaviour {
         if (hit.collider != null) {
             GameObject click_obj = hit.transform.gameObject;
             SpriteRenderer spriteRenderer = click_obj.GetComponent<SpriteRenderer>();
-            GameObject mineCount = GameObject.Find("MineCount");
+            GameObject mineCount = GameObject.Find("MineCounter");
             //점 클릭 시 색 변경
             if (click_obj.CompareTag("Dot")) {
                 if (spriteRenderer.color == Color.white)

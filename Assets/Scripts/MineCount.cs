@@ -9,9 +9,8 @@ public class MineCount : MonoBehaviour
 
     public TextMeshProUGUI text;
     public float mineCount = 0;
-    float correctCount = 0;
+    public float correctCount = 0;
 
-    // Start is called before the first frame update
     void Start()
     {
         GameObject[] mines = GameObject.FindGameObjectsWithTag("Mine");
@@ -23,7 +22,6 @@ public class MineCount : MonoBehaviour
         text.text = mineCount.ToString();
     }
 
-    // Update is called once per frame
     void Update()
     {
         text.text = mineCount.ToString();

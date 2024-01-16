@@ -34,7 +34,7 @@ public class BtnControl : MonoBehaviour
 
     public void OnclickStage1Btn()
     {
-        SceneManager.LoadScene("BasicLevel");
+        SceneManager.LoadScene("Level 1");
     }
 
     public void OnclickPauseBtn()

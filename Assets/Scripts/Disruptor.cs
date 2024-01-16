@@ -21,7 +21,6 @@ public class Disruptor : MonoBehaviour
         SetNewTarget();
 #if UNITY_EDITOR
         gridValue = UnityEditor.EditorSnapSettings.move.x;
-        print(gridValue);
 #endif
     }
 
