@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 053881ece67a17b4d8cae14545bc2e42, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -158,6 +158,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12d76d4bcd9f5e7478814035bea46fef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPos: 2.8
-  playerPos: {x: 0, y: 0}
   invincibilityDuration: 3

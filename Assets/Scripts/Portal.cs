@@ -21,8 +21,8 @@ public class Portal : MonoBehaviour {
             //콜라이더 비활성화
             toObj[0].GetComponent<Collider2D>().enabled = false;
             toObj[1].GetComponent<Collider2D>().enabled = false;
-            toObj[0].GetComponent<SpriteRenderer>().color = Color.yellow;
-            toObj[1].GetComponent<SpriteRenderer>().color = Color.yellow;
+            toObj[0].GetComponent<SpriteRenderer>().color = Color.black;
+            toObj[1].GetComponent<SpriteRenderer>().color = Color.black;
 
             print("쿨타임");
             Invoke("Enabled", seconds);
