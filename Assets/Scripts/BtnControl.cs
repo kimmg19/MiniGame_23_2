@@ -19,19 +19,31 @@ public class BtnControl : MonoBehaviour
 
     public void OnclickBackBtn1()
     {
-        Debug.Log("¾À º¯°æ");
         SceneManager.LoadScene("Main");
     }
 
     public void OnclickBackBtn2()
     {
-        Debug.Log("¾À º¯°æ");
         SceneManager.LoadScene("ChooseLevel");
     }
 
-    public void OnclickStageBtn()
+    public void OnclickOptionBtn()
     {
-        Debug.Log("¾À º¯°æ");
+        SceneManager.LoadScene("Option");
+    }
+
+    public void OnclickStage1Btn()
+    {
         SceneManager.LoadScene("BasicLevel");
+    }
+
+    public void OnclickPauseBtn()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void OnclickResumeBtn()
+    {
+        Time.timeScale = 1;
     }
 }

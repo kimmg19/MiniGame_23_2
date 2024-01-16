@@ -4,26 +4,28 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class MineCount : MonoBehaviour
+public class Timer : MonoBehaviour
 {
-
     public TextMeshProUGUI text;
-    float mineCount = 0;
+    private float min = 0;
+    private float sec = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        GameObject[] mines = GameObject.FindGameObjectsWithTag("Mine");
-        for (int i = 0; i<mines.Length; i++)
-        {
-            mineCount++;
-        }
-        text.text = mineCount.ToString();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        sec += Time.deltaTime;
+        if (sec >= 60f)
+        {
+            min += 1;
+            sec = 0;
+        }
+
+        text.text = string.Format("{0:D2}:{1:D2}", (int)min, (int)sec);
     }
 }
