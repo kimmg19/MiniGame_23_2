@@ -9,23 +9,20 @@ public class Timer : MonoBehaviour
     public TextMeshProUGUI text;
     private float min = 0;
     private float sec = 0;
+    private bool isTimerActive = false; // 타이머 활성화 여부   
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    void Update() {
+        if(isTimerActive)
+            sec += Time.deltaTime;
+            if (sec >= 60f) {
+                min += 1;
+                sec = 0;
+            }
+
+            text.text = string.Format("{0:D2}:{1:D2}", (int)min, (int)sec);
         
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        sec += Time.deltaTime;
-        if (sec >= 60f)
-        {
-            min += 1;
-            sec = 0;
-        }
-
-        text.text = string.Format("{0:D2}:{1:D2}", (int)min, (int)sec);
+    public void StartTimer() {
+        isTimerActive = true;
     }
 }
