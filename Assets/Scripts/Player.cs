@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour {
     float gridValue;
     float maxPos;
-
+    AudioSource audioSource;
     private bool isInvincible = false;
     public float invincibilityDuration = 3f;
 
     void Start() {
+        audioSource = GetComponent<AudioSource>();
 #if UNITY_EDITOR
         gridValue = UnityEditor.EditorSnapSettings.move.x;
 #endif
@@ -58,11 +59,15 @@ public class Player : MonoBehaviour {
             }
         } else if (collision.CompareTag("InvincibilityItem")) {
             Debug.Log("아이템 사용");
+            audioSource.Play();
             if (isInvincible) {
                 Debug.Log("이미 무적 상태입니다.");
             } else {
                 StartCoroutine(ActivateInvincibility());
             }
+        }
+        if (collision.CompareTag("HintItem")) {
+            audioSource.Play();
         }
     }
 
